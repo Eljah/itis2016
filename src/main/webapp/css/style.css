@@ -1,0 +1,15 @@
+.math {
+    margin: 10px 0;
+}
+
+.error {
+    color: red;
+}
+
+#error-message {
+    display: none;
+}
+
+.show {
+    display: block;
+}
