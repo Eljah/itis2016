@@ -26,7 +26,8 @@ public class TestEncodinServlet extends HttpServlet {
         HttpSession session=req.getSession();
         String hist=(String)session.getAttribute("history");
         resp.getWriter().write("Введено было значение "+text+"<BR>"
-                +"<form action=\"encode\" method=\"post\"><input type=\"text\" name=\"text\" ></input></form><br>Прошлое введеное значение как оно сохранено в сессии "+hist);
+                +"<form action=\"encode\" method=\"post\"><input type=\"text\" name=\"text\" ></input></form>" +
+                "<br>Прошлое введеное значение как оно сохранено в сессии "+hist);
         session.setAttribute("history", text);
         //resp.addHeader("Own","Own header");
         //int a=2/0;
@@ -41,7 +42,11 @@ public class TestEncodinServlet extends HttpServlet {
         //req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
         String text=req.getParameter("text");
+        String text2=req.getParameter("MathAction");
+
         System.out.println(text);
+
+        System.out.println("Text2"+text2);
         String newText= new String(text.getBytes ("ISO-8859-1"), "UTF-8");//=URLDecoder.decode(text, "utf8");
         System.out.println(newText);
         Cookie[] cc=req.getCookies();
@@ -51,7 +56,7 @@ public class TestEncodinServlet extends HttpServlet {
             if (ccc.getName().equals("histcookie")) {postHistory=ccc.getValue();}
         }
         resp.getWriter().write("Введено было значение " + text + "<BR>"
-                + "<form action=\"encode\" method=\"post\"><input type=\"text\" name=\"text\" ></input></form> <br>Прошлое введеное значение как оно сохранено в куки "+postHistory);
+                + "<form action=\"encode\" method=\"post\"><input type=\"text\" name=\"text\" ></input><button type=\"submit\"  name = \"submitbut\" value = \"Coffee\">Knop</button> </form><br>Прошлое введеное значение как оно сохранено в куки "+postHistory);
         resp.addCookie(new Cookie("histcookie",text));
         log.debug("Cookies added "+text);
         // /getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);    }
